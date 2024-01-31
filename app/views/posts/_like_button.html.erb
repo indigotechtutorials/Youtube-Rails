@@ -1,0 +1,14 @@
+<div id="<%= dom_id(post, :like) %>" class="flex items-center gap-4">
+  <div class="w-10">
+    <% if like = current_user.likes.where(post_id: post.id).last %>
+      <%= link_to post_like_path(post, like), class: "hover:text-indigo-500", data: { turbo_method: :delete } do %>
+        <%= render Icons::ThumbsUpSolidComponent.new %>
+      <% end %>
+    <% else %>
+      <%= link_to post_likes_path(post), class: "hover:text-indigo-500", data: { turbo_method: :post } do %>
+        <%= render Icons::ThumbsUpComponent.new %>
+      <% end %>
+    <% end %>
+  </div>
+  <%= @post.likes.count %>
+</div>
